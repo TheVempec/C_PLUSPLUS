@@ -1,0 +1,32 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    double a = 3;
+    double b = 0.707;
+    double f;
+
+    f = pow(
+        0.5 * sin((a + b) * M_PI / 8.0) +
+        1.308 * cos((a - b) * M_PI / 8.0),
+        2.0 / 3.0
+    );
+
+    cout << "f = " << f << endl;
+
+    double a1 = 2;
+    double b1 = 13.13;
+    double f1;
+    const double e = 2.718281828;
+
+    f1 = 3 * sqrt(
+        pow(e, 1 - (pow(e, a1) / b1) * cos(b1 / a1 * M_PI) + log(0.708) * b1)
+    );
+
+    cout << "f1 = " << f1 << endl;
+
+    return 0;
+}
