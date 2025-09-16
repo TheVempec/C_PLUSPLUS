@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void exercise3() {
+    float x, y;
+
+    cout << "Enter coordinate 1: ";
+    cin >> x;
+
+    cout << "Enter coordinate 2: ";
+    cin >> y;
+
+    if (y <= 2 - x && x >= 0 && y >= 0) {
+        cout << "Point is included" << endl;
+    } else {
+        cout << "Point isn't included" << endl;
+    }
+}
+
+int main() {
+    float x, y, c, b, a, alpha, beta;
+    float Y;
+
+    cout << "Enter number 1: ";
+    cin >> x;
+
+    cout << "Enter number 2: ";
+    cin >> y;
+
+    cout << "Enter number 3: ";
+    cin >> c;
+
+    cout << "Enter number 4: ";
+    cin >> b;
+
+    cout << "Enter number 5: ";
+    cin >> a;
+
+    cout << "Enter number 6: ";
+    cin >> alpha;
+
+    cout << "Enter number 7: ";
+    cin >> beta;
+
+    if (x >= 1.5) {
+        Y = ((pow(x, 3) + 3 * a) * c) / a - b + x;
+        cout << "First formula used" << endl;
+    } else {
+        Y = pow(sin(alpha), 2) * pow(sin(beta), 2);
+        cout << "Second formula used" << endl;
+    }
+
+    cout << "Y = " << Y << endl;
+
+    exercise3();
+
+    return 0;
+}
