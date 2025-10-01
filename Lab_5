@@ -1,0 +1,50 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cmath>
+using  namespace std;
+
+int main()
+{
+    double x = 7;
+    double y;
+    
+     y = pow(sin(x), 5) + (5 * x - 1.5);
+     cout << "y = " << y << endl;
+  
+////////////////////////////////////////////////////////////////////////  
+
+  long double P = 1;
+    for (int i = 10; i <= 98; i += 2) {
+        P *= i;
+    }
+    cout << "Product of all even two-digit numbers = " << P << endl;
+    return 0;
+   
+   
+////////////////////////////////////////////////////////////////////////
+
+
+    double a, b, h;
+    cout << "Enter a, b and h: ";
+    cin >> a >> b >> h;
+
+    cout << "-------------------" << endl;
+    cout << ":   X   :    Y    :" << endl;
+    cout << "-------------------" << endl;
+
+    for (double x = a; x <= b; x += h) {
+        if (10 - 5 * x < 0) {
+            cout << "x = " << x << " does not belong to ODZ (x <= 2)" << endl;
+            break; 
+        }
+
+        double y = 6 * pow(x, 3) + pow(10 - 5 * x, 1.0 / 10); 
+        cout << ": " << setw(5) << fixed << setprecision(2) << x 
+             << " : " << setw(7) << setprecision(4) << y << " :" << endl;
+    }
+
+    cout << "-------------------" << endl;
+    return 0;
+
+}
