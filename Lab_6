@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int sum = 0;
+    int N;
+
+    cout << "Enter N-digit number: ";
+    cin >> N;
+
+    int n = N; 
+
+    while (n > 0)
+    {
+        int a = n % 10; 
+        cout << "a: " << a << endl;
+
+        if (a > 5)
+        {
+            sum += a;
+        }
+
+        n /= 10; 
+    }
+
+    cout << "Result of addition: " << sum << endl;
+
+    return 0;
+}
