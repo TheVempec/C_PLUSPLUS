@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 #include <cmath>
+#include <iomanip>
 int main()
 {
   bool answer;
@@ -11,7 +12,7 @@ int main()
   cin >> value;
   
  answer = 
-    (value < 1 || (value >= 0 && value != 10)) ||
+    (value < 1 && (value >= 0 && value != 10)) ||
     (value * 2 < 20 && value - 2 > -2) ||
     (value - 1 > 1 && value / 2 < 10) ||
     (value == 111);
@@ -26,12 +27,13 @@ int main()
   cout<<"Enter five values: ";
   cin>> a >> b >> c >> d >> f ;
   
-  cout << "You entered: " << endl;
-  cout<< "a= " << a<< endl;
-  cout<< "b= " << b<< endl;
-  cout<< "c= " << c<< endl;
-  cout<< "d= " << d<< endl;
-  cout<< "f= " << f<< endl;
+  cout << a << endl;
+  cout << fixed << setprecision(2) << b << endl;
+  cout.unsetf(ios :: fixed);
+  cout << setprecision(6) <<c <<endl;
+  cout << fixed << setprecision(2) << d << endl;
+  cout.unsetf(ios::fixed);
+  cout << setprecision(0) <<f <<endl;
   
   //////////////////////////////////////7////////////////////////////////////
   
@@ -76,12 +78,18 @@ int main()
 
     cout << "Enter forth part of IP:" << endl;
     cin >> forth;
-
+if(first >= 0 && first <= 255 && second >= 0 && second <= 255 && third >= 0 && third <= 255 && forth >= 0 && forth <= 255){
+            
     cout << "The IP address is: "
          << first << "."
          << second << "."
          << third << "."
          << forth << endl;
+    } else{
+        cout << "Erorr"<<endl;
+        }
+    
+   
 
 
   return 0;
