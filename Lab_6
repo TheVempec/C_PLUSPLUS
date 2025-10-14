@@ -9,11 +9,9 @@ int main()
     cout << "Enter N-digit number: ";
     cin >> N;
 
-    int n = N; 
-
-    while (n > 0)
+    while (N > 0)
     {
-        int a = n % 10; 
+        int a = N % 10; 
         cout << "a: " << a << endl;
 
         if (a > 5)
@@ -21,7 +19,7 @@ int main()
             sum += a;
         }
 
-        n /= 10; 
+        N /= 10; 
     }
 
     cout << "Result of addition: " << sum << endl;
