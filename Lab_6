@@ -3,26 +3,24 @@ using namespace std;
 
 int main()
 {
-    int sum = 0;
     int N;
-
-    cout << "Enter N-digit number: ";
+    cout << "Enter a natural number N: ";
     cin >> N;
+
+    int sum = 0;
 
     while (N > 0)
     {
         int a = N % 10; 
-        cout << "a: " << a << endl;
-
         if (a > 5)
         {
             sum += a;
         }
 
-        N /= 10; 
+        N /= 10;
     }
 
-    cout << "Result of addition: " << sum << endl;
+    cout << "Sum of digits greater than 5: " << sum << endl;
 
     return 0;
 }
