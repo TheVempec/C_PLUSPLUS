@@ -8,12 +8,18 @@ int main() {
     cin>>n;
    
     
-    if(n<=1){
+    if(n<=1 ){
         
-     cout<<"Entered number is too small! Try entering a height againe"<<endl;
+     cout<<"Entered number is too small! Try entering a number again"<<endl;
      cin>>n;
-        
+     
     }
+    
+    if(n>60){
+        
+        cout<<"Entered number " << n << " is too big!"<<endl;
+        return 0;
+        }
     
     cout <<'+'; 
     for(int i = 0; i <n; i++ ){
@@ -36,4 +42,3 @@ int main() {
         cout<< '+' <<endl;
         return 0;
     }
-//60
