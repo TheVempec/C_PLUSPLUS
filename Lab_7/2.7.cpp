@@ -3,8 +3,8 @@
 using namespace std;
 
 int main() {
-    // Оголошення змінних
-    double pi4 = 0.0;          // Акумулятор для суми ряду (π/4)
+   
+    double pi4 = 0.0;          //  (π/4)
     double sign = 1.0;         // Чергування знаку (+1, -1, +1, ...)
     long n;                    // Кількість (доданків)
     
@@ -19,11 +19,10 @@ int main() {
         double term = sign / denominator;
         pi4 += term; 
         
-        // Оновлення для наступної ітерації:
-        // 1. Зміна знаку: +1 -> -1 -> +1
+        // Зміна знаку: +1 -> -1 -> +1
         sign = -sign;
         
-        // 2. Збільшення знаменника на 2: 1 -> 3 -> 5
+        // Збільшення знаменника на 2: 1 -> 3 -> 5
         denominator += 2.0; 
     }
     
@@ -31,9 +30,10 @@ int main() {
     double pi_value = pi4 * 4.0;
 
    
-    cout <<fixed <<setprecision(20)//кількість знаків після коми
+    cout <<fixed <<setprecision(20);//кількість знаків після коми
     
     cout << "Pi = " << pi_value << endl;
 
     return 0;
+
 }
