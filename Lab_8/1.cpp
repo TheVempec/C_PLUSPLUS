@@ -4,25 +4,45 @@
 using namespace std;
 
 int main() {
-    int arr[12] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    const int m =12;
+    int arr[m] = {5,6,7,2,3,4,8,10,9,11,12,1};
      
-     sort(arr, arr +12);
-     
-     cout<<"Increase: ";
-     
-    for (int i = 0; i < 12; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
+    for(int i = 0; i < m-1;i++){
+        for(int j=0; j <m-i-1; j++){          
+            if(arr[j] > arr[j+1]){
+                
+                int t = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = t;
+                
+                }           
+            } 
+        }
     
-    reverse(arr, arr +12);
     
-     cout<<"Decrease: ";
-     
-    for (int j = 0; j < 12; j++) {
-        cout << arr[j] << " ";
+    cout << "Increase sort: ";
+    for(int i =0; i < m; i++){
+        cout << arr[i]<< " ";
     }
-    cout << endl;
-
+    
+    cout << endl;  
+     for(int i = 0; i<m-1;i++){
+        for(int j=0; j <m-i-1; j++){          
+            if(arr[j] < arr[j+1]){
+                
+                int t = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = t;
+                
+                }           
+            } 
+        }
+    
+    
+    cout << "Decrease sort: ";
+    for(int i =0; i < m; i++){
+        cout << arr[i] << " ";    
+        }
     return 0;
+
 }
