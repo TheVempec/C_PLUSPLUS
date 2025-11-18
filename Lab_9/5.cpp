@@ -1,48 +1,52 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <algorithm> 
-#include <limits> 
 using namespace std;
 
 int main() {
     
     const int ARRAY_SIZE = 10;
-    
-    int randomM[ARRAY_SIZE] = {};
+    int randomM[ARRAY_SIZE];
 
-    int largest = numeric_limits<int>::min(); 
-    int secondLargest = numeric_limits<int>::min(); 
-    
     srand(time(NULL));
 
     cout << "The given array: ";
+
     
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        
-        randomM[i] = rand() % 1000; 
+        randomM[i] = rand() % 1000;
         cout << randomM[i] << " ";
     }
     cout << endl;
+
     
-    for (int i = 0; i < ARRAY_SIZE; i++) {
-        int current = randomM[i];
-        
-        if (current > largest) {
-            
-            secondLargest = largest; 
-            
-            largest = current;
-        } 
-        
-        else if (current > secondLargest && current < largest) {
-            
-            secondLargest = current;
+    int largest = randomM[0];
+    int secondLargest = randomM[0];
+
+
+    for (int i = 1; i < ARRAY_SIZE; i++) {
+        if (randomM[i] > largest) {
+            largest = randomM[i];
         }
     }
+
     
-    if (secondLargest == numeric_limits<int>::min()) {
-         cout << "The array does not contain enough unique elements to determine the second largest." << endl;
+    bool foundSecond = false;
+
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        int current = randomM[i];
+
+        if (current < largest) {
+            if (!foundSecond || current > secondLargest) {
+                secondLargest = current;
+                foundSecond = true;
+            }
+        }
+    }
+
+
+    if (!foundSecond) {
+        cout << "The array does not contain enough unique elements to determine the second largest." << endl;
     } else {
         cout << "The largest element: " << largest << endl;
         cout << "The second largest element: " << secondLargest << endl;
