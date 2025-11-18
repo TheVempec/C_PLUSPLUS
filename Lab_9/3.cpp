@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <algorithm> 
 using namespace std;
 
 int main() {
@@ -43,7 +42,9 @@ int main() {
      
     if (minIndex != maxIndex) {
         
-        swap(randomM[minIndex], randomM[maxIndex]);
+        int temp = randomM[minIndex];          
+        randomM[minIndex] = randomM[maxIndex]; 
+        randomM[maxIndex] = temp;              
     }
    
     cout << "Array after exchange: ";
