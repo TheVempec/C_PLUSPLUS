@@ -10,9 +10,8 @@ int main() {
     Date time;       // загальний час
     int addMinutes;  // кількість хвилин що потрібно додати
     
-    while (true) {   // ← ГОЛОВНИЙ ЦИКЛ
+    while (true) {   
 
-        // Ввід часу
         while (true) { 
             cout << "\n=== Time Input ===\n";
 
@@ -58,3 +57,4 @@ int main() {
 
     return 0;
 }
+
