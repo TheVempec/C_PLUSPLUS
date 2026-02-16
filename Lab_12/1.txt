@@ -12,10 +12,8 @@ int main(void) {
 
     for (int i = 1; i < n; i++) {
         
-        p++;
-        
-        if (*p < min) {
-            min = *p;
+        if (*(p+i) < min) {
+            min = *(p+i);
         }
     }
 
