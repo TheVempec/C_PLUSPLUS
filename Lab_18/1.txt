@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+
+void increment(int &a) {
+    a++;
+    cout << "Single param: " << a << endl;
+}
+
+void increment(int &a, int b) {
+    a = a + b; 
+    cout << "Two params: " << a << endl;
+}
+
+int main(void) {
+    int var = 0;
+    for(int i = 0; i < 10; i++) {
+        if(i % 2)
+            increment(var);     
+        else
+            increment(var, i);  
+    }
+    
+    cout << "Final value of var: " << var << endl;
+    return 0;
+}
