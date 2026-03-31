@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    
+    string info, text;
+
+    
+    if (!getline(cin, info)) return 0;
+    
+    
+    if (!getline(cin, text)) return 0;
+    /
+    info += ",";
+
+    size_t wordPosition = 0;
+    
+    while ((wordPosition = info.find(',')) != string::npos) {
+        
+        
+        string part = info.substr(0, wordPosition);
+        
+        size_t equal = part.find('=');
+        if (equal != string::npos) {
+            
+            string keyName = part.substr(0, equal);
+            string val = part.substr(equal + 1);
+
+            
+            string placeholder = "[" + keyName + "]";
+
+            
+            size_t found = 0;
+            while ((found = text.find(placeholder, found)) != string::npos) {
+                text.replace(found, placeholder.length(), val);
+                
+                found += val.length();
+            }
+        }
+
+        
+        info.erase(0, wordPosition + 1);
+    }
+
+    
+    cout << text << endl;
+
+    return 0;
+}

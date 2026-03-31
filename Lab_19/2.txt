@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    
+ string password;
+ getline(cin, password);
+ 
+ if(password.length() != 8){
+        cout << "The password must be exactly eight characters long."<<endl;
+        return 0;
+     }
+     
+    bool hasUpper = false;
+    bool hasLower = false;
+    bool hasDigit = false;
+    bool hasSpecial = false;
+    
+    for(int i=0 ; i < password.length(); i++){
+        char cin=password[i];
+        
+        if(cin >= 'A' && cin <= 'Z'){
+            hasUpper = true;
+        }else if(cin >= 'a' && cin <= 'z'){
+            hasLower = true;
+        }else if(cin >= '0' && cin <= '9'){
+             hasDigit = true;
+        }else{
+           hasSpecial = true; 
+        }
+    }
+     
+    bool isValid = true;
+
+    if (!hasUpper) {
+        std::cout << "The password must have at least one upper-case letter" << std::endl;
+        isValid = false;
+    }
+    if (!hasLower) {
+        std::cout << "The password must have at least one lower-case letter" << std::endl;
+        isValid = false;
+    }
+    if (!hasDigit) {
+        std::cout << "The password must have at least one digit" << std::endl;
+        isValid = false;
+    }
+    if (!hasSpecial) {
+        std::cout << "The password must have at least one special character" << std::endl;
+        isValid = false;
+    }
+
+    if (isValid) {
+        std::cout << "The password is valid" << std::endl;
+    }
+    
+    return 0;
+}
