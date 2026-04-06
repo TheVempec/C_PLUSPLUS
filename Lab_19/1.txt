@@ -12,7 +12,7 @@ int main() {
     
     
     if (!getline(cin, text)) return 0;
-    /
+    
     info += ",";
 
     size_t wordPosition = 0;
