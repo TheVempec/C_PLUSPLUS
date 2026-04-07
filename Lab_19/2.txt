@@ -35,24 +35,24 @@ int main() {
     bool isValid = true;
 
     if (!hasUpper) {
-        std::cout << "The password must have at least one upper-case letter" << std::endl;
+        cout << "The password must have at least one upper-case letter" << endl;
         isValid = false;
     }
     if (!hasLower) {
-        std::cout << "The password must have at least one lower-case letter" << std::endl;
+        cout << "The password must have at least one lower-case letter" << endl;
         isValid = false;
     }
     if (!hasDigit) {
-        std::cout << "The password must have at least one digit" << std::endl;
+        cout << "The password must have at least one digit" << endl;
         isValid = false;
     }
     if (!hasSpecial) {
-        std::cout << "The password must have at least one special character" << std::endl;
+        cout << "The password must have at least one special character" << endl;
         isValid = false;
     }
 
     if (isValid) {
-        std::cout << "The password is valid" << std::endl;
+        cout << "The password is valid" << endl;
     }
     
     return 0;
