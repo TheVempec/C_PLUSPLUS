@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person
+{
+public:
+    string name;
+    int age;
+    string job;
+    int experience;
+    string education;
+};
+
+void print(Person* person) {
+    cout << person->name << " is " << person->age << " years old" << endl;
+    cout << "Job: " << person->job << endl;
+    cout << "Experience: " << person->experience << " years" << endl;
+    cout << "Education: " << person->education << endl;
+    cout << "----------------------" << endl;
+}
+
+int main() {
+
+    Person p1;
+    p1.name = "Harry";
+    p1.age = 23;
+    p1.job = "Student";
+    p1.experience = 1;
+    p1.education = "College";
+
+    Person p2;
+    p2.name = "John";
+    p2.age = 56;
+    p2.job = "Chef";
+    p2.experience = 26;
+    p2.education = "Culinary school";
+
+    Person p3;
+    p3.name = "Gregor";
+    p3.age = 25;
+    p3.job = "Architect";
+    p3.experience = 12;
+    p3.education = "Architecture and urban planning";
+
+    cout << "Meet " << p1.name << endl;
+    print(&p1);
+
+    cout << "Meet " << p2.name << endl;
+    print(&p2);
+
+    cout << "Meet " << p3.name << endl;
+    print(&p3);
+
+    return 0;
+}
