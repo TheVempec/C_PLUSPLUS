@@ -1,0 +1,109 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+class FlightBooking {
+public:
+    FlightBooking(int id, int capacity, int reserved);
+    void printStatus();
+    bool reserveSeats(int number_of_seats);
+    bool cancelReservations(int number_of_seats);
+
+private:
+    int id;
+    int capacity;
+    int reserved;
+};
+
+void FlightBooking::printStatus() {
+    
+    double percentage = (reserved * 100.0) / capacity;
+    
+    cout << "Flight " << id << ": " << reserved << "/" 
+         << capacity << " (" << percentage << "%) seats taken" << endl;
+}
+
+FlightBooking::FlightBooking(int id, int capacity, int reserved) {
+    this->id = id;
+    this->capacity = capacity;
+    
+    int max_seats = capacity * 1.05;
+    
+    if (reserved < 0) {
+        this->reserved = 0;
+    } else if (reserved > max_seats) {
+        this->reserved = max_seats;
+    } else {
+        this->reserved = reserved;
+    }
+}
+
+bool FlightBooking::reserveSeats(int number_of_seats) {
+    if (number_of_seats < 0) return false;
+    
+    int max_seats = capacity * 1.05;
+    if (reserved + number_of_seats <= max_seats) {
+        reserved += number_of_seats;
+        return true;
+    }
+    return false;
+}
+
+bool FlightBooking::cancelReservations(int number_of_seats) {
+    if (number_of_seats < 0) return false;
+    
+    if (reserved - number_of_seats >= 0) {
+        reserved -= number_of_seats;
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    int reserved = 0, capacity = 0;
+    
+    cout << "Provide flight capacity: ";
+    cin >> capacity;
+    cout << "Provide number of reserved seats: ";
+    cin >> reserved;
+    cin.ignore(); 
+    
+    FlightBooking booking(1, capacity, reserved);
+    
+    string line;
+    while (true) {
+        booking.printStatus();
+        cout << "What would you like to do?: ";
+        
+        if (!getline(cin, line) || line == "quit") {
+            break;
+        }
+        
+        stringstream ss(line);
+        string command;
+        int n;
+        
+        if (!(ss >> command >> n)) {
+            if (command != "quit") cout << "Invalid input" << endl;
+            continue;
+        }
+
+        bool success = false;
+        if (command == "add") {
+            success = booking.reserveSeats(n);
+        } else if (command == "cancel") {
+            success = booking.cancelReservations(n);
+        } else {
+            cout << "Unknown command" << endl;
+            continue;
+        }
+
+        if (!success) {
+            cout << "Cannot perform this operation" << endl;
+        }
+    }
+    
+    return 0;
+}

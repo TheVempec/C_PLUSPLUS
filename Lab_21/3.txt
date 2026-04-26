@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+class FlightBooking {
+public:
+    FlightBooking(int id, int capacity, int reserved);
+    FlightBooking();
+    void printStatus();
+    bool reserveSeats(int number_of_seats);
+    bool cancelReservations(int number_of_seats);
+    int getId() { return id; }
+    void remove() { id = 0; }
+private:
+    int id;
+    int capacity;
+    int reserved;
+};
+
+FlightBooking::FlightBooking() {
+    id = 0; capacity = 0; reserved = 0;
+}
+
+void FlightBooking::printStatus() {
+    if (id == 0) return;
+    
+    double percentage = (capacity > 0) ? (reserved * 100.0) / capacity : 0;
+    
+    cout << "Flight " << id << ": " << reserved << "/" 
+         << capacity << " (" << percentage << "%) seats taken" << endl;
+}
+
+FlightBooking::FlightBooking(int id, int capacity, int reserved) {
+    this->id = id;
+    this->capacity = capacity;
+    int max_seats = capacity * 1.05;
+    
+    if (reserved < 0) this->reserved = 0;
+    else if (reserved > max_seats) this->reserved = max_seats;
+    else this->reserved = reserved;
+}
+
+bool FlightBooking::reserveSeats(int number_of_seats) {
+    if (number_of_seats < 0) return false;
+    if (reserved + number_of_seats <= capacity * 1.05) {
+        reserved += number_of_seats;
+        return true;
+    }
+    return false;
+}
+
+bool FlightBooking::cancelReservations(int number_of_seats) {
+    if (number_of_seats < 0) return false;
+    if (reserved - number_of_seats >= 0) {
+        reserved -= number_of_seats;
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    FlightBooking flights[10];
+    string line, cmd;
+    int id, val;
+
+    while (cout << "What would you like to do?: " && getline(cin, line) && line != "quit") {
+        stringstream ss(line);
+        id = 0; val = 0;
+        ss >> cmd >> id >> val;
+
+        bool handled = false;
+
+        for (int i = 0; i < 10; i++) {
+            
+            if (cmd == "create" && flights[i].getId() == 0) {
+                flights[i] = FlightBooking(id, val, 0);
+                handled = true; 
+                break;
+            }
+            
+            if (id != 0 && flights[i].getId() == id) {
+                if (cmd == "add") handled = flights[i].reserveSeats(val);
+                else if (cmd == "cancel") handled = flights[i].cancelReservations(val);
+                else if (cmd == "delete") { flights[i].remove(); handled = true; }
+                break;
+            }
+        }
+
+        if (!handled) cout << "Cannot perform this operation" << endl;
+
+        for (auto &f : flights) if (f.getId() > 0) f.printStatus();
+    }
+    return 0;
+}
