@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+class Fraction {
+public:
+    Fraction(int num, int den) : numerator(num), denominator(den) {
+        if (denominator == 0) denominator = 1;
+        reduce();
+    }
+
+    
+    bool isGreaterThan(Fraction that) {
+        
+        return (this->numerator * that.denominator) > (that.numerator * this->denominator);
+    }
+
+    bool isLessThan(Fraction that) {
+        return (this->numerator * that.denominator) < (that.numerator * this->denominator);
+    }
+
+    bool isEqual(Fraction that) {
+        
+        return (this->numerator == that.numerator) && (this->denominator == that.denominator);
+    }
+
+    string toString() {
+        if (numerator == 0) return "0";
+        if (denominator == 1) return to_string(numerator);
+        return to_string(numerator) + "/" + to_string(denominator);
+    }
+
+private:
+    int numerator;
+    int denominator;
+
+    void reduce() {
+        if (denominator < 0) {
+            numerator = -numerator;
+            denominator = -denominator;
+        }
+        int a = abs(numerator);
+        int b = abs(denominator);
+        while (b) {
+            a %= b;
+            swap(a, b);
+        }
+        numerator /= a;
+        denominator /= a;
+    }
+};
+
+int main() {
+    int n1, d1, n2, d2;
+    char slash;
+
+    cout << "Enter first fraction (a/b): ";
+    cin >> n1 >> slash >> d1;
+    cout << "Enter second fraction (c/d): ";
+    cin >> n2 >> slash >> d2;
+
+    Fraction f1(n1, d1);
+    Fraction f2(n2, d2);
+
+    cout << "\nComparison results:" << endl;
+    cout << f1.toString() << " == " << f2.toString() << " is " << (f1.isEqual(f2) ? "True" : "False") << endl;
+    cout << f1.toString() << " > " << f2.toString() << " is " << (f1.isGreaterThan(f2) ? "True" : "False") << endl;
+    cout << f1.toString() << " < " << f2.toString() << " is " << (f1.isLessThan(f2) ? "True" : "False") << endl;
+
+    return 0;
+}
