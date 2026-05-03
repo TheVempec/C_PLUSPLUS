@@ -1,0 +1,110 @@
+#include <iostream>
+#include <string>
+#include <cmath> 
+
+using namespace std;
+
+class Fraction {
+public:
+    
+    Fraction(int num, int den) : numerator(num), denominator(den) {
+        if (denominator == 0) denominator =1;
+        reduce();
+    }
+
+    void reduce(){
+        if (denominator < 0) {
+            numerator = -numerator;
+            denominator = -denominator;
+        }
+            int a = abs(numerator);
+            int b = abs(denominator);
+            while (b){
+                a %= b;
+                swap(a,b);
+                
+                }
+                numerator /= a;
+        denominator /= a;
+        }
+        
+        string toString() const {
+        int whole = numerator / denominator;
+        int remainder = abs(numerator % denominator);
+
+        string result = "";
+
+        
+        if (whole == 0 && remainder == 0) return "0";
+
+        
+        if (whole != 0) {
+            result += to_string(whole);
+            if (remainder != 0) result += " "; 
+        } else if (numerator < 0) {
+            
+            result += "-";
+        }
+
+        
+        if (remainder != 0) {
+            result += to_string(remainder) + "/" + to_string(denominator);
+        }
+
+        return result;
+    }
+        
+    double toDouble() const {
+        return static_cast<double>(numerator) / denominator;
+    }
+
+    Fraction plus(Fraction that) {
+        int num = this->numerator * that.denominator + that.numerator * this->denominator;
+        int den = this->denominator * that.denominator;
+        return Fraction(num, den);
+    }
+
+    Fraction minus(Fraction that) {
+        int num = this->numerator * that.denominator - that.numerator * this->denominator;
+        int den = this->denominator * that.denominator;
+        return Fraction(num, den);
+    }
+
+    Fraction times(Fraction that) {
+        // Виправлено: чисельник * чисельник
+        int num = this->numerator * that.numerator;
+        int den = this->denominator * that.denominator;
+        return Fraction(num, den);
+    }
+
+    Fraction by(Fraction that) {
+        // Ділення - це множення на перевернутий дріб
+        int num = this->numerator * that.denominator;
+        int den = this->denominator * that.numerator;
+        return Fraction(num, den);
+    }
+
+private:
+    int numerator;
+    int denominator;
+};
+
+int main() {
+    int n1, d1, n2, d2;
+    char slash;
+
+    cout << "Enter first fraction (num/den): ";
+    cin >> n1 >> slash >> d1;
+    cout << "Enter second fraction (num/den): ";
+    cin >> n2 >> slash >> d2;
+
+    Fraction f1(n1, d1);
+    Fraction f2(n2, d2);
+
+    cout << f1.toString() << " + " << f2.toString() << " = " << f1.plus(f2).toString() << endl;
+    cout << f1.toString() << " - " << f2.toString() << " = " << f1.minus(f2).toString() << endl;
+    cout << f1.toString() << " * " << f2.toString() << " = " << f1.times(f2).toString() << endl;
+    cout << f1.toString() << " / " << f2.toString() << " = " << f1.by(f2).toString() << endl;
+
+    return 0;
+}
