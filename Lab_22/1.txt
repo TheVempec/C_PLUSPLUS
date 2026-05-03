@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+#include <cmath> 
+
+using namespace std;
+
+class Fraction {
+public:
+    
+    Fraction(int num, int den) : numerator(num), denominator(den) {
+        if (denominator < 0) {
+            numerator = -numerator;
+            denominator = -denominator;
+        }
+    }
+
+    
+    double toDouble() const {
+        return static_cast<double>(numerator) / denominator;
+    }
+
+    
+    string toString() const {
+        int whole = numerator / denominator;
+        int remainder = abs(numerator % denominator);
+
+        string result = "";
+
+        
+        if (whole == 0 && remainder == 0) return "0";
+
+        
+        if (whole != 0) {
+            result += to_string(whole);
+            if (remainder != 0) result += " "; 
+        } else if (numerator < 0) {
+            
+            result += "-";
+        }
+
+        
+        if (remainder != 0) {
+            result += to_string(remainder) + "/" + to_string(denominator);
+        }
+
+        return result;
+    }
+
+private:
+    int numerator;
+    int denominator;
+};
+
+int main() {
+    int num, den;
+    char slash;
+
+    cout << "Enter fraction (num / den): ";
+    
+    if (cin >> num >> slash >> den) {
+        Fraction fraction(num, den);
+        
+        cout << fraction.toString() << " is " << fraction.toDouble() << " in decimal" << endl;
+    }
+
+    return 0;
+}
