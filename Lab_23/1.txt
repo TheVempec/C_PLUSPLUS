@@ -71,7 +71,6 @@ public:
     }
 
     Fraction times(Fraction that) {
-        // Виправлено: чисельник * чисельник
         int num = this->numerator * that.numerator;
         int den = this->denominator * that.denominator;
         return Fraction(num, den);
