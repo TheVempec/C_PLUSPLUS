@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+#include <cmath> 
+
+using namespace std;
+
+class Tree {
+public:
+    
+    virtual ~Tree() {}
+
+  
+    virtual void draw() const = 0;
+};
+
+
+class SlashTree : public Tree {
+public:
+    void draw() const override {
+        std::cout << "Drawing 1:\n";
+        std::cout << " /\\\n";
+        std::cout << "//\\\\\n";
+    }
+};
+
+
+class StarTree : public Tree {
+public:
+    void draw() const override {
+        std::cout << "Drawing 2:\n";
+        std::cout << " /\\\n";
+        std::cout << "/**\\\n";
+    }
+};
+
+class PlusTree : public Tree {
+public:
+    void draw() const override {
+        std::cout << "Drawing 3:\n";
+        std::cout << " /\\\n";
+        std::cout << "/++\\\n";
+    }
+};
+
+int main() {
+
+    Tree* forest[3];
+
+    forest[0] = new SlashTree();
+    forest[1] = new StarTree();
+    forest[2] = new PlusTree();
+
+    for (int i = 0; i < 3; ++i) {
+        forest[i]->draw();
+    }
+
+    for (int i = 0; i < 3; ++i) {
+        delete forest[i];
+    }
+
+    return 0;
+}
