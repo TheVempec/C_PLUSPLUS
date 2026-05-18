@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string>
+#include <cmath> 
+#include <sstream>
+#include <vector>
+using namespace std;
+
+class IPAddress {
+protected:
+    string ip;
+
+public:
+
+    IPAddress(const string& ipAddress) : ip(ipAddress) {}
+
+    IPAddress(const IPAddress& other) : ip(other.ip) {}
+
+    virtual ~IPAddress() = default;
+
+    virtual void print() const {
+        cout << ip;
+    }
+
+    string getIp() const {
+        return ip;
+    }
+};
+
+class IPAddressChecked : public IPAddress {
+private:
+    bool isValid;
+
+    bool validateIP(const string& ipAddress) {
+        stringstream ss(ipAddress);
+        string segment;
+        vector<string> segments;
+
+        while (getline(ss, segment, '.')) {
+            segments.push_back(segment);
+        }
+
+        if (segments.size() != 4) return false;
+
+        for (const const string& seg : segments) {
+            if (seg.empty()) return false;
+            for (char ch : seg) {
+                if (!isdigit(ch)) return false;
+            }
+
+            try {
+                int val = stoi(seg);
+                if (val < 0 || val > 255) return false;
+                
+                if (seg.size() > 1 && seg[0] == '0') return false;
+            } catch (...) {
+                return false; 
+            }
+        }
+        return true;
+    }
+
+public:
+    IPAddressChecked(const string& ipAddress) : IPAddress(ipAddress) {
+        isValid = validateIP(ipAddress);
+    }
+
+    IPAddressChecked(const IPAddressChecked& other) 
+        : IPAddress(other), isValid(other.isValid) {}
+
+    void print() const override {
+
+        IPAddress::print(); 
+        
+        if (isValid) {
+            cout << " - Correct";
+        } else {
+            cout << " - Not Correct";
+        }
+    }
+};
+
+int main() {
+    string input1, input2, input3;
+
+
+    if (!getline(cin, input1)) return 0;
+    if (!getline(cin, input2)) return 0;
+    if (!getline(cin, input3)) return 0;
+
+
+    IPAddress ip1(input1);
+    IPAddressChecked ip2(input2);
+    IPAddressChecked ip3(input3);
+
+ 
+    ip1.print();
+    cout << endl;
+
+    ip2.print();
+    cout << endl;
+
+    ip3.print();
+    cout << endl;
+
+    return 0;
+}
